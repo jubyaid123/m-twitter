@@ -1,14 +1,43 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-
+import Message from './components/message';
+import UserCard from './components/UserCard';
 const Home = () => {
     // Dummy data for top messages and trending users
     const topMessages = [
-        { id: 1, text: 'Top Message 1', likes: 120 },
-        { id: 2, text: 'Top Message 2', likes: 105 },
-        { id: 3, text: 'Top Message 3', likes: 95 },
+        {
+            id: 1,
+            author: 'Author 1',
+            date: '2021-01-01',
+            content: 'Top Message 1',
+            likes: 120,
+            dislikes: 5,
+            readCount: 300,
+            keywords: ['keyword1', 'keyword2', 'keyword3']
+        },
+        {
+            id: 2,
+            author: 'Author 2',
+            date: '2021-02-01',
+            content: 'Top Message 2',
+            likes: 105,
+            dislikes: 3,
+            readCount: 250,
+            keywords: ['keyword4', 'keyword5']
+        },
+        {
+            id: 3,
+            author: 'Author 3',
+            date: '2021-03-01',
+            content: 'Top Message 3',
+            likes: 95,
+            dislikes: 2,
+            readCount: 200,
+            keywords: ['keyword6']
+        },
     ];
+
 
     const trendingUsers = [
         { id: 1, name: 'User 1', followers: 5000 },
@@ -16,40 +45,48 @@ const Home = () => {
         { id: 3, name: 'User 3', followers: 4200 },
     ];
 
-    return (<div className="flex h-screen text-white">
-        <div className="flex flex-col items-center w-1/2 ">
-            <Image
-                src="/mtwitter-logos_white.png"
-                width={700}
-                height={300}
-                layout="responsive"
-                alt="Logo"
-            />
+    return (
+
+        <div className=" grid grid-cols-12">
+            <div className="col-span-5 ">
+                <div className=''>
+                    <Image
+                        src="/mtwitter-logos_white.png"
+                        width={800}
+                        height={400}
+                        layout="responsive"
+                        alt="Logo"
+                    />
+                </div>
+                <div className=' flex flex-row justify-center items-center mb-1'>
+                    <Link href="/signup" className=' text-black font-bold text-lg bg-white rounded mb-20 mr-10 p-3'>SIGN UP</Link>
+                    <Link href="/login" className='text-black font-bold text-lg bg-white rounded mb-20 p-3 '>LOG IN</Link>
+                </div>
+
+            </div>
+            <div className=" col-span-4  ">
+                <div className=' flex flex-col justify-center items-center'>
+                    <h2 className="text-2xl font-bold mt-20">WHAT USERS ARE SAYING</h2>
+                    <div className=' mt-5 mb-5'>
+                        {topMessages.map(message => (
+                            <Message key={message.id} messageData={message} />
+                        ))}
+
+                    </div>
+                </div>
+            </div>
+            <div className=' col-span-3'>
+                <div className='flex flex-col justify-center items-center'>
+                    <h2 className="text-2xl font-bold mb-4 mt-20">TRENDY USERS</h2>
+                    {trendingUsers.map(user => (
+                        <UserCard key={user.id} userData={user} />
+                    ))}
+                </div>
+
+            </div>
+
         </div>
-        <div className="flex flex-col w-1/2 p-5">
-            <div className="mb-10">
-                <h2 className="text-2xl font-bold mb-4">Join as a User</h2>
-                <Link href="/signup-ordinary" passHref>
-                    <button className="block mb-2 p-2 bg-blue-500 rounded hover:bg-blue-600">Sign up as Ordinary User</button>
-                </Link>
-                <Link href="/signup-corporate" passHref>
-                    <button className="block p-2 bg-blue-500 rounded hover:bg-blue-600">Sign up as Corporate User</button>
-                </Link>
-            </div>
-            <div>
-                <h2 className="text-2xl font-bold mb-4">Top Liked Messages</h2>
-                {topMessages.map(message => (
-                    <p key={message.id} className="mb-2">{message.text} - {message.likes} Likes</p>
-                ))}
-            </div>
-            <div>
-                <h2 className="text-2xl font-bold mb-4 mt-6">Trending Users</h2>
-                {trendingUsers.map(user => (
-                    <p key={user.id} className="mb-2">{user.name} - {user.followers} Followers</p>
-                ))}
-            </div>
-        </div>
-    </div>
+
     );
 };
 

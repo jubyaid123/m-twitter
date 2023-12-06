@@ -45,7 +45,7 @@ const Login = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-64 py-2 px-4 border rounded"
+            className="w-64 py-2 px-4 border rounded text-black"
             required
           />
         </div>
@@ -55,17 +55,17 @@ const Login = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-64 py-2 px-4 border rounded"
+            className="w-64 py-2 px-4 border rounded text-black"
             required
           />
         </div>
-        <button type="submit" className="bg-teal-500 hover:bg-teal-700 text-teal font-bold py-2 px-4 rounded">
+        <button type="submit" className="bg-white hover:bg-teal-700 text-black font-bold py-2 px-4 rounded">
           Login
         </button>
       </form>
       <div>
         <p className='py-4'>
-          Don't have an account? Sign up <Link href="/signup" className='teal'>here</Link>
+          Don't have an account? Sign up <Link href="/signup" className='blue_gradient'>here</Link>
         </p>
       </div>
     </div>
