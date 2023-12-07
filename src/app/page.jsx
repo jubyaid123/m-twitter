@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import Message from './components/message';
+import Message from './components/message.client';
 import UserCard from './components/UserCard';
 const Home = () => {
     // Dummy data for top messages and trending users

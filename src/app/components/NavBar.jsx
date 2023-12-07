@@ -22,7 +22,7 @@ const NavBar = () => {
           <input
             type="text"
             placeholder="Search..."
-            className="px-3 py-2 rounded-md text-sm"
+            className="px-3 py-2 rounded-md text-sm text-black"
           />
         </div>
       </div>

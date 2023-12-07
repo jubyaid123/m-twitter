@@ -3,13 +3,23 @@ import React, { useState } from "react";
 import Image from 'next/image';
 import Link from 'next/link';
 import NavBar from "../components/NavBar";
-import Message from "../components/Message";
+import Message from "../components/message.client";
 
 const Homepage = () => {
     const [messageText, setMessageText] = useState("");
     const [file, setFile] = useState(null);
     const [isJobOrAd, setIsJobOrAd] = useState(false);
     const [messages, setMessages] = useState([]); // State to store messages
+
+    const handleLike = (messageId) => {
+        setMessages(messages.map(msg => {
+            if (msg.id === messageId) {
+                return { ...msg, likes: (msg.likes || 0) + 1 };
+            }
+            return msg;
+        }));
+    };
+    
 
     const handlePostMessage = () => {
         const newMessage = {
@@ -30,6 +40,17 @@ const Homepage = () => {
 
         // Handle file upload and other logic as needed
     };
+
+
+    const handleDislike = (messageId) => {
+        setMessages(messages.map(msg => {
+            if (msg.id === messageId) {
+                return { ...msg, dislikes: (msg.dislikes || 0) + 1 };
+            }
+            return msg;
+        }));
+    };
+
 
     const handleFileChange = (event) => {
         setFile(event.target.files[0]);
@@ -66,8 +87,12 @@ const Homepage = () => {
                         Post
                     </button>
                 </div>
-                {messages.map((msg, index) => (
-                    <Message key={index} messageData={msg} />
+                {messages.map((msg) => (
+                    <Message 
+                    key={msg.id} 
+                    messageData={msg}
+                    onLike = {handleLike}
+                    onDislike={handleDislike} />
                 ))}
             </div>
             <div className=" col col-start-1 col-end-3">

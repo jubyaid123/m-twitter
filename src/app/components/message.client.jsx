@@ -1,10 +1,21 @@
 import React from 'react';
 
-const Message = ({ messageData }) => {
+const Message = ({ messageData, onLike, onDislike }) => {
   const checkTabooWords = (content) => {
     // Implement taboo word check logic here
     return content;
   };
+
+  const handleLike = async () => {
+    onLike(messageData.id);
+  };
+
+  const handleDislike = async () => {
+    onDislike(messageData.id);
+  };
+
+
+
 
   return (
     <div className="w-full p-4 bg-white rounded-lg shadow-md mb-6 ">
@@ -15,8 +26,13 @@ const Message = ({ messageData }) => {
       <p className="text-gray-800 mt-2">{checkTabooWords(messageData.content)}</p>
       <div className="mt-3 flex justify-between items-center">
         <div className="flex space-x-2">
-          <button className="text-blue-600 hover:text-blue-800">Like</button>
-          <button className="text-red-600 hover:text-red-800">Dislike</button>
+          <button
+            className="text-blue-600 hover:text-blue-800"
+            >Like
+          </button>
+          <button className="text-red-600 hover:text-red-800"
+             // Call onDislike when the button is clicked
+          >Dislike</button>
           <button className="text-green-600 hover:text-green-800">Comment</button>
         </div>
         <div className="text-sm text-gray-600">
@@ -29,7 +45,7 @@ const Message = ({ messageData }) => {
             <span key={index} className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
               #{keyword}
             </span>
-          )) ||<span>No keywords</span>}
+          )) || <span>No keywords</span>}
         </div>
         <div className="flex items-center space-x-1">
           <span className="text-blue-600">{messageData.likes}</span>
